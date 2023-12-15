@@ -2,38 +2,71 @@
 
 \section{Introductie}%
 \label{sec:introductie}
+%Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+%\begin{itemize}
+ % \item kaderen thema
+  %\item de doelgroep
+  %\item de probleemstelling en (centrale) onderzoeksvraag
+  %\item de onderzoeksdoelstelling
+%\end{itemize}
+%Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+%De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+%Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
+%Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+De landbouwsector investeert steeds meer en meer in nieuwe technologieën zoals robotica om de efficiëntie en productiviteit te verhogen.
+Bij \textbf{ILVO} ontwikkelen ze al een tijdje verschillende robots om in elk gebied van de landbouw in te zetten, zo kan het gaan van monitoren van vee tot het precisiespuiten van bomen in boomkwekerijen.
+Een cruciaal aspect van deze implementatie met robots is dat de navigatie heel nauwkeurig zou moeten zijn.
+Systemen zoals \textbf{RTK-GPS} die heel nauwkeurig zijn met hun navigatie ondervinden problemen zoals signaalverstoringen door het bladerdek in boomkwekerijen waardoor de precisie van de navigatie negatief wordt beïnvloed.\newline
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+Deze studie zal vooral hulp kunnen bieden aan ILVO, want dit bedrijf kampt met het probleem dat de signalen van het navigatiesysteem van hun \('\)Treebot\('\) soms wegvalt door de omgeving ban de boomkwekerij waar ze deze implementeren.
+Andere landbouwbedrijven die zich specifiek richten op het implementeren van robotica in de landbouw kunnen hier ook baat bij hebben.\newline
 
-\begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
-\end{itemize}
+Zoals eerder vernoemd ligt het probleem bij de navigatie op plekken die de RTK-GPS signalen verstoren, voornamelijk het bladerdek.
+In de robotica wordt dit doorgaans opgelost door \textbf{sensorfusie}, hierbij worden verschillende datastromen gecombineerd waarna de meest nauwkeurige datastromen het meest zullen doorwegen in het eindresultaat.
+Er zal een odometrie bepaling gedaan moeten worden door middel van het matchen van 2 opeenvolgende lidar scans (pointclouds) waarvoor er gebruik gemaakt zal worden van \textbf{3D SLAM}.
+De centrale onderzoeksvraag luidt dus als volgt: \("\)Hoe kan de navigatie van autonome robots in boomkwekerijen geoptimaliseerd worden door de integratie van 3D SLAM en sensorfusie voor verbeterde odometrie, met een focus op lidar pointcloud matching en het gebruik van convolutionele neurale netwerken?\("\)\newline
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
-
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
-
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+Het doel van dit onderzoek is het bekomen van een werkend navigatie systeem met een geoptimaliseerd matching algoritme die de mogelijkheid heeft om met een CNN de features te bepalen.
+De te verwachten resultaten naast de uitgeschreven scriptie is dus een in de praktijk werkende \("\)treebot\("\) die zonder moeite, of met veel minder moeite, door de omgevingen van boomkwekerijen zou kunnen navigeren.
+Daarnaast zal er nog een rapport met uitgebreide informatie opgesteld worden zodat als iemand anders deze implementatie zou willen gebruiken dit stap voor stap kan uitvoeren.
 
 %---------- Stand van zaken ---------------------------------------------------
 
-\section{State-of-the-art}%
-\label{sec:state-of-the-art}
+\section{Literatuurstudie}%
+\label{sec:Literatuurstudie}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+In deze literatuurstudie wordt er wat meer uitgelegd over het onderzoeksonderwerp en zullen termen zoals \textbf{LIDAR SLAM}, \textbf{3D SLAM}, \textbf{pointclouds}, \textbf{CNN's}, \textbf{odometrie}, ingeleid worden.
+LIDAR (Laser Imaging Detection and Ranging) SLAM (Simultaneous Localization and Mapping) is een manier voor een robot om zijn omgeving te reconstrueren, zo weet de robot naar welke kant hij kan uitgaan en dat allemaal in real-time. \autocite{8215333}
+Dit is op zich al een grote uitdaging voor een robot omdat de meeste robots nog werken op getrainde data die ervoor zorgen dat de robot niet tegen een obstakel zou botsen.
+De lasers in een LIDAR systeem meten de afstand van een robot tot een object door de lasers te sturen naar het object en daarvan de tijd te pakken die de laser nodig had tot aan het object te komen. \autocite{9526266}
+Zo kan de robot perfect weten hoe ver er van hem een obstakel is verwijderd en of hij een bocht moet maken of niet.
+LIDAR sensoren hebben een lange detectieafstand en een hoge nauwkeurigheid wat betekent dat een pixel een veel groeter bereik kan hebben van mogelijke waarden dan bijvoorbeeld een gekleurde afbeelding\autocite{3D_LIDAR}\newline
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+Er bestaan ook 2 soorten LIDAR sensoren namelijk 2D LIDAR en 3D LIDAR, 3D LIDAR is nauwkeuriger omdat deze een wijdere range hebben voor te scannen, maar ze zijn natuurlijk veel duurder.
+In samenwerking met 2D sensoren kan een 3D mapping algoritme wel een driedimensionale weergave geven van de map, dit is cruciaal voor complexe omgevingen zoals deze in de boomkwekerijen waar het bladerdek de grote stoorzender is.
+Deze 3D mapping algoritmes worden dan ook wel 3D SLAM genoemd.\newline
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+Het gebruik van CNN's (Convolutional Neural Networks) is van groot belang om de kenmerken binnen de pointclouds van de LIDAR scans te identificeren en te matchen.
+Een point cloud is een set van datapunten waar elk punt wordt gerepresenteerd door x-, y-en z-coördinaten, dit betekent dus dat een point cloud een representatie is van een object in 3D. \autocite{HAN2017103}
+In packet data wordt elk punt echter voorgesteld door een afstandwaarde, een rotatiehoek en een laser-ID zoals vermeld staat in \autocite{3D_LIDAR}.
+De point clouds worden gegenereerd door de LIDAR sensoren op de robot die zoals daarjuist al vermeld de gereflecteerde signalen opvangt om zo de omgeving te kunnen scannen.
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+CNN's hebben hun vermogen om betere classificatie prestaties te leveren zeker al getoond, andere klassieke methoden zoals Support Vector Machines, Decison Trees en Random Forrest. \autocite{8480863}
+Voor het analyseren van 3D point clouds bestaat er een aanpak genaamd annulaire convolutie, deze aanpak kan de lokale geometrie van elk punt beter vastleggen door ringvormige structuren en richtingen in de berekening te verduidelijken.
+Een belangrijk voordeel van deze methode is dat het in staat is om zich aan te passen aan de onregelmatige vormen van de point clouds die worden gegenereerd in natuurlijke gebieden zoals boomkwekerijen.
+Gemakkelijk is het zeker niet om deze point clouds te analyseren en er de juiste features uit te halen om ze te matchen.
+Modellen zoals multi-view CNN's en raster CNN's hebben vaak te kampen met zware berekeningen en een heel groot geheugengebruik.\autocite{Komarichev_2019_CVPR}
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+Odometrie is een manier om de positie van een autonome robot te bepalen aan de hand van de bewegingen die het gemaakt heeft.
+Deze bewegingen worden gemeten door bijvoorbeeld een punt op het wiel aan te duiden en zo de afstand te meten die het wiel heeft afgelegd.
+Door middel van de LIDAR scans kan het odometrie-algoritme de positie van de robot bepalen door de afstand te meten tussen de huidige positie en de vorige positie. \autocite{zhang2014loam}
+
+
+%Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+%Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+%Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+%Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+%Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
 
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
@@ -42,31 +75,86 @@ Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle no
 %   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
 %   ...'')
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
+%Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+%Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+%Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+%Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+%Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+%Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+%Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+Het onderzoek zal bestaan uit verschillende fases namelijk:
+    \begin{itemize}
+        \item Literatuurstudie
+        \item Experimenteren en simuleren
+        \item Ontwikkelen en Testen
+        \item Integratie en Evalueren
+        \item Conclusie
+    \end{itemize}
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+\subsection{Literatuurstudie}
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+De literatuurstudie is het startpunt van het onderzoek, hierbij is het doel om van het onderzoeksonderwerp een grondig begrip te ontwikkelen.
+Verschillende termen zoals LIDAR, SLAM, odometrie, pointclouds, \ldots zullen moeten gekend zijn om de experimenten en het verdere onderzoek in goede banen te leiden.
+De kennis is niet het enige waar de literatuurstudie nodig voor is, het kan ook helpen om verschillende libraries duidelijk te maken die tijdens het onderzoek benuttigd kunnen worden.
+Het is dus van groot belang om de verschillende artikels die beschikbaar worden gesteld grondig te lezen en te begrijpen.
+Er worden 2 weken geschat om deze fase te voltooien.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+\subsection{Experimenteren en simuleren}
 
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+De volgende fase zal bestaan uit het uitvoeren van experimenten en simulaties, de bedoeling hier van is om de theoretische achtergrond uit te testen in de praktijk.
+Er zal ook kennisgemaakt worden met de robot waar er mee zal gewerkt worden, zo zal er een betere schets kunnen gevormd worden in hoe LIDAR sensoren werken.
+Bestaande datasets zullen onder de loep genomen worden en geanalyseerd zodat er met de verschillende algoritmes en modellen kan geëxperimenteerd worden.
+Door het experimenteren kunnen we een selectie maken van de methodes die veelbelovend zijn zodat we tijdens het ontwikkelen niet veel tijd verliezen door slechte methodes te gebruiken.
+Deze fase zal ongeveer 3 weken in beslag nemen.
+
+\subsection{Ontwikkelen en testen}
+
+In deze fase van het onderzoek staat de ontwikkeling van het deep learning algoritme centraal, uit de vorige fase halen we de modellen die het accuraatst waren er uit en worden deze verder ontwikkeld.
+Dit houdt in dat de modellen zullen geïmplementeerd worden door frameworks zoals Tensorflow of PyTorch, ook zullen de modellen getest worden op hun vermogen om de kenmerken en features binnen de point clouds te identificeren.
+Uit deze fase zal er dus een model komen die uitgewerkt is en geschikt is om te beginnen testen in een simulatie.
+De robot in de simulatie zal met het model geïntegreerd worden en er zal getest worden of de robot in de simulatie kan navigeren door een gelijkaardige omgeving aan de boomkwekerij.
+Moest dit dan niet zo zijn dan zullen er een paar stappen moeten teruggezet worden om het model terug aan te passen.
+Deze fase zal ongeveer 4 à 5 weken in beslag nemen.
+
+\subsection{Integratie en Evalueren}
+
+Als het gekozen model geslaagd is voor de test in de simulatie zal dit model uiteindelijk geïntegreerd worden in de robot in de praktijk.
+Daarnaast zal er een evaluatie test uitgevoerd worden om te kijken of het model daadwerkelijk ook in de praktijk kan werken.
+Het is van groot belang om te kijken of de robot nu wel veel vooruitgang heeft gemaakt qua nauwkeurigheid in zijn navigatie en dat het systeem niet wegvalt door het bladerdek.
+Deze fase zal ongeveer 2 weken in beslag nemen.
+
+\includegraphics[scale=0.8]{C:/School/Bachelorproef/latex-hogent-bachproef-main/latex-hogent-bachproef-main/voorstel/img/treebot}
+(foto van de treebot van ilvo waar het praktische deel op getest zal worden
+)
+\subsection{Conclusie}
+
+De conclusie zal bestaan uit het schrijven van de resultaten en bevindingen van het onderzoek in een rapport.
+Het is van cruciaal belang dat hier ook nog wat tijd in gestoken wordt waarbij genoeg gereflecteerd wordt over de verzamelde data, de ervaring die opgedaan is tijdens het onderzoek en de struikelblokken.
+De pluspunten en negatieve punten zullen ook overlopen worden zodat er aanbevelingen kunnen opgesteld worden over het onderzoek die kunnen gebruikt worden in verdere studies.
+Als laatste zal er dan een conclusie getrokken worden waarbij de onderzoeksvraag kan beantwoord worden, als deze beantwoord kan worden dan kan het onderzoek als een succes worden beschouwd.
+Deze fase zal ongeveer 1 à 2 weken in beslag nemen.
+
+\subsection{Gantt-chart}
+
+\includegraphics[width=\linewidth]{C:/School/Bachelorproef/latex-hogent-bachproef-main/latex-hogent-bachproef-main/voorstel/img/gantt}
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+%Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+%Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+%Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+Het verwachte resultaat zou zijn dat er een aanzienlijke vooruitgang is in hoe de autonome robot navigeert in de boomkwekerij.
+De combinatie van 3D SLAM en CNN gebaseerde sensorfusie zou ervoor moeten zorgen dat er een betere identificatie en matching zou zijn van de omgeving.
+Dit zou dan moeten resulteren in een betere odometrie en routeplanning.
+Dit onderzoek heeft niet enkel potentieel voor toepassing in de boomkwekerijen, maar kan ook perfect geimplmenteerd worden in andere landbouwsectoren, zo kan dit onderzoek dienen voor verder onderzoek in landbouwtechnologie en robotica.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
 
