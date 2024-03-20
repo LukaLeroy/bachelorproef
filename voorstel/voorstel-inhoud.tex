@@ -14,11 +14,11 @@
 %Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
 %Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 De landbouwsector investeert steeds meer en meer in nieuwe technologieën zoals robotica om de efficiëntie en productiviteit te verhogen.
-Bij \textbf{ILVO} ontwikkelen ze al een tijdje verschillende robots om in elk gebied van de landbouw in te zetten, zo kan het gaan van monitoren van vee tot het precisiespuiten van bomen in boomkwekerijen.
-Een cruciaal aspect van deze implementatie met robots is dat de navigatie heel nauwkeurig zou moeten zijn.
+Bij \textbf{ILVO} ontwikkelen ze al een tijdje verschillende robots om in elk gebied van de landbouw in te zetten, van het monitoren van vee tot het precisiespuiten van bomen in boomkwekerijen.
+Een cruciaal aspect van deze implementatie met robots is dat de navigatie heel nauwkeurig moet zijn.
 Systemen zoals \textbf{RTK-GPS} die heel nauwkeurig zijn met hun navigatie ondervinden problemen zoals signaalverstoringen door het bladerdek in boomkwekerijen waardoor de precisie van de navigatie negatief wordt beïnvloed.\newline
 
-Deze studie zal vooral hulp kunnen bieden aan ILVO, want dit bedrijf kampt met het probleem dat de signalen van het navigatiesysteem van hun \('\)Treebot\('\) soms wegvalt door de omgeving ban de boomkwekerij waar ze deze implementeren.
+Deze studie zal vooral hulp kunnen bieden aan ILVO, want dit bedrijf kampt met het probleem dat de signalen van het navigatiesysteem van hun \('\)Treebot\('\) soms wegvallen door de omgeving van de boomkwekerij waar ze deze implementeren.
 Andere landbouwbedrijven die zich specifiek richten op het implementeren van robotica in de landbouw kunnen hier ook baat bij hebben.\newline
 
 Zoals eerder vernoemd ligt het probleem bij de navigatie op plekken die de RTK-GPS signalen verstoren, voornamelijk het bladerdek.
@@ -35,31 +35,33 @@ Daarnaast zal er nog een rapport met uitgebreide informatie opgesteld worden zod
 \section{Literatuurstudie}%
 \label{sec:Literatuurstudie}
 
-In deze literatuurstudie wordt er wat meer uitgelegd over het onderzoeksonderwerp en zullen termen zoals \textbf{LIDAR SLAM}, \textbf{3D SLAM}, \textbf{pointclouds}, \textbf{CNN's}, \textbf{odometrie}, ingeleid worden.
-LIDAR (Laser Imaging Detection and Ranging) SLAM (Simultaneous Localization and Mapping) is een manier voor een robot om zijn omgeving te reconstrueren, zo weet de robot naar welke kant hij kan uitgaan en dat allemaal in real-time. \autocite{8215333}
-Dit is op zich al een grote uitdaging voor een robot omdat de meeste robots nog werken op getrainde data die ervoor zorgen dat de robot niet tegen een obstakel zou botsen.
-De lasers in een LIDAR systeem meten de afstand van een robot tot een object door de lasers te sturen naar het object en daarvan de tijd te pakken die de laser nodig had tot aan het object te komen. \autocite{9526266}
+In deze literatuurstudie wordt er wat meer uitgelegd over het onderzoeksonderwerp en zullen termen zoals \textbf{Visual SLAM}, \textbf{feature matching}, \textbf{pointclouds}, \textbf{CNN's}, \textbf{odometrie}, ingeleid worden.
+LIDAR (Laser Imaging Detection and Ranging) SLAM (Simultaneous Localization and Mapping) is een manier voor een robot om zijn omgeving te reconstrueren, zo weet de robot naar welke kant hij kan uitgaan en dat allemaal in real-time \autocite{8215333}.
+Dit is op zich al een grote uitdaging voor een robot omdat het niet simpel is om in real time beslissingen te maken, dit moet allemaal zeer snel gebeuren.
+De lasers in een LIDAR systeem meten de afstand van een robot tot een object door de lasers te sturen naar het object en daarvan de tijd te registreren die de laser nodig had om tot aan het object te komen \autocite{9526266}.
 Zo kan de robot perfect weten hoe ver er van hem een obstakel is verwijderd en of hij een bocht moet maken of niet.
 LIDAR sensoren hebben een lange detectieafstand en een hoge nauwkeurigheid wat betekent dat een pixel een veel groeter bereik kan hebben van mogelijke waarden dan bijvoorbeeld een gekleurde afbeelding\autocite{3D_LIDAR}\newline
+
+Het begint allemaal bij het RTK-GPS systeem, RTK staat voor Real Time Kinematic en is een navigatietechniek die de positie van de ontvanger van de GPS-signalen tot op enkele centimeters nauwkeurig kan bepalen.
+
 
 Er bestaan ook 2 soorten LIDAR sensoren namelijk 2D LIDAR en 3D LIDAR, 3D LIDAR is nauwkeuriger omdat deze een wijdere range hebben voor te scannen, maar ze zijn natuurlijk veel duurder.
 In samenwerking met 2D sensoren kan een 3D mapping algoritme wel een driedimensionale weergave geven van de map, dit is cruciaal voor complexe omgevingen zoals deze in de boomkwekerijen waar het bladerdek de grote stoorzender is.
 Deze 3D mapping algoritmes worden dan ook wel 3D SLAM genoemd.\newline
 
 Het gebruik van CNN's (Convolutional Neural Networks) is van groot belang om de kenmerken binnen de pointclouds van de LIDAR scans te identificeren en te matchen.
-Een point cloud is een set van datapunten waar elk punt wordt gerepresenteerd door x-, y-en z-coördinaten, dit betekent dus dat een point cloud een representatie is van een object in 3D. \autocite{HAN2017103}
+Een point cloud is een set van datapunten waar elk punt wordt gerepresenteerd door x-, y-en z-coördinaten, dit betekent dus dat een point cloud een representatie is van een object in 3D \autocite{HAN2017103}.
 In packet data wordt elk punt echter voorgesteld door een afstandwaarde, een rotatiehoek en een laser-ID zoals vermeld staat in \autocite{3D_LIDAR}.
 De point clouds worden gegenereerd door de LIDAR sensoren op de robot die zoals daarjuist al vermeld de gereflecteerde signalen opvangt om zo de omgeving te kunnen scannen.
 
-CNN's hebben hun vermogen om betere classificatie prestaties te leveren zeker al getoond, andere klassieke methoden zoals Support Vector Machines, Decison Trees en Random Forrest. \autocite{8480863}
 Voor het analyseren van 3D point clouds bestaat er een aanpak genaamd annulaire convolutie, deze aanpak kan de lokale geometrie van elk punt beter vastleggen door ringvormige structuren en richtingen in de berekening te verduidelijken.
 Een belangrijk voordeel van deze methode is dat het in staat is om zich aan te passen aan de onregelmatige vormen van de point clouds die worden gegenereerd in natuurlijke gebieden zoals boomkwekerijen.
 Gemakkelijk is het zeker niet om deze point clouds te analyseren en er de juiste features uit te halen om ze te matchen.
 Modellen zoals multi-view CNN's en raster CNN's hebben vaak te kampen met zware berekeningen en een heel groot geheugengebruik.\autocite{Komarichev_2019_CVPR}
 
-Odometrie is een manier om de positie van een autonome robot te bepalen aan de hand van de bewegingen die het gemaakt heeft.
+Odometrie is een manier om de positie van een autonome robot te bepalen aan de hand van de bewegingen die deze gemaakt heeft.
 Deze bewegingen worden gemeten door bijvoorbeeld een punt op het wiel aan te duiden en zo de afstand te meten die het wiel heeft afgelegd.
-Door middel van de LIDAR scans kan het odometrie-algoritme de positie van de robot bepalen door de afstand te meten tussen de huidige positie en de vorige positie. \autocite{zhang2014loam}
+Door middel van de LIDAR scans kan het odometrie-algoritme de positie van de robot bepalen door de afstand te meten tussen de huidige positie en de vorige positie \autocite{zhang2014loam}.
 
 
 %Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
@@ -92,8 +94,8 @@ Het onderzoek zal bestaan uit verschillende fases namelijk:
     \begin{itemize}
         \item Literatuurstudie
         \item Experimenteren en simuleren
-        \item Ontwikkelen en Testen
-        \item Integratie en Evalueren
+        \item Ontwikkelen en testen
+        \item Integratie en evalueren
         \item Conclusie
     \end{itemize}
 
@@ -101,15 +103,15 @@ Het onderzoek zal bestaan uit verschillende fases namelijk:
 
 De literatuurstudie is het startpunt van het onderzoek, hierbij is het doel om van het onderzoeksonderwerp een grondig begrip te ontwikkelen.
 Verschillende termen zoals LIDAR, SLAM, odometrie, pointclouds, \ldots zullen moeten gekend zijn om de experimenten en het verdere onderzoek in goede banen te leiden.
-De kennis is niet het enige waar de literatuurstudie nodig voor is, het kan ook helpen om verschillende libraries duidelijk te maken die tijdens het onderzoek benuttigd kunnen worden.
+De kennis is niet het enige waar de literatuurstudie nodig voor is, het kan ook helpen om verschillende libraries duidelijk te maken die tijdens het onderzoek gebruikt kunnen worden.
 Het is dus van groot belang om de verschillende artikels die beschikbaar worden gesteld grondig te lezen en te begrijpen.
 Er worden 2 weken geschat om deze fase te voltooien.
 
 \subsection{Experimenteren en simuleren}
 
-De volgende fase zal bestaan uit het uitvoeren van experimenten en simulaties, de bedoeling hier van is om de theoretische achtergrond uit te testen in de praktijk.
-Er zal ook kennisgemaakt worden met de robot waar er mee zal gewerkt worden, zo zal er een betere schets kunnen gevormd worden in hoe LIDAR sensoren werken.
-Bestaande datasets zullen onder de loep genomen worden en geanalyseerd zodat er met de verschillende algoritmes en modellen kan geëxperimenteerd worden.
+De volgende fase zal bestaan uit het uitvoeren van experimenten en simulaties, de bedoeling hiervan is om de theoretische achtergrond uit te testen in de praktijk.
+Er zal ook kennisgemaakt worden met de robot waar er mee zal gewerkt worden, zo zal er een beter inzicht kunnen gevormd worden in hoe LIDAR sensoren werken.
+Data die gecapteerd is door de robot zal onder de loep genomen worden en geanalyseerd zodat er met de verschillende algoritmes en modellen kan geëxperimenteerd worden.
 Door het experimenteren kunnen we een selectie maken van de methodes die veelbelovend zijn zodat we tijdens het ontwikkelen niet veel tijd verliezen door slechte methodes te gebruiken.
 Deze fase zal ongeveer 3 weken in beslag nemen.
 
@@ -118,7 +120,7 @@ Deze fase zal ongeveer 3 weken in beslag nemen.
 In deze fase van het onderzoek staat de ontwikkeling van het deep learning algoritme centraal, uit de vorige fase halen we de modellen die het accuraatst waren er uit en worden deze verder ontwikkeld.
 Dit houdt in dat de modellen zullen geïmplementeerd worden door frameworks zoals Tensorflow of PyTorch, ook zullen de modellen getest worden op hun vermogen om de kenmerken en features binnen de point clouds te identificeren.
 Uit deze fase zal er dus een model komen die uitgewerkt is en geschikt is om te beginnen testen in een simulatie.
-De robot in de simulatie zal met het model geïntegreerd worden en er zal getest worden of de robot in de simulatie kan navigeren door een gelijkaardige omgeving aan de boomkwekerij.
+Een bestaande robot in simulatie of één die wordt aangemaakt in de simulatie zal met het model geïntegreerd worden en er zal getest worden of de robot in de simulatie kan navigeren door een gelijkaardige omgeving aan de boomkwekerij.
 Moest dit dan niet zo zijn dan zullen er een paar stappen moeten teruggezet worden om het model terug aan te passen.
 Deze fase zal ongeveer 4 à 5 weken in beslag nemen.
 
@@ -155,6 +157,6 @@ Deze fase zal ongeveer 1 à 2 weken in beslag nemen.
 Het verwachte resultaat zou zijn dat er een aanzienlijke vooruitgang is in hoe de autonome robot navigeert in de boomkwekerij.
 De combinatie van 3D SLAM en CNN gebaseerde sensorfusie zou ervoor moeten zorgen dat er een betere identificatie en matching zou zijn van de omgeving.
 Dit zou dan moeten resulteren in een betere odometrie en routeplanning.
-Dit onderzoek heeft niet enkel potentieel voor toepassing in de boomkwekerijen, maar kan ook perfect geimplmenteerd worden in andere landbouwsectoren, zo kan dit onderzoek dienen voor verder onderzoek in landbouwtechnologie en robotica.
+Dit onderzoek heeft niet enkel potentieel voor toepassing in de boomkwekerijen, maar kan ook perfect geïmplmenteerd worden in andere landbouwsectoren, zo kan dit onderzoek dienen voor verder onderzoek in landbouwtechnologie en robotica.
 
 

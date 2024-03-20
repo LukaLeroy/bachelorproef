@@ -7,12 +7,30 @@
 
 % Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+\section{test}
 
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+In deze literatuurstudie wordt er wat meer uitgelegd over het onderzoeksonderwerp en zullen termen zoals \textbf{Visual SLAM}, \textbf{feature matching}, \textbf{pointclouds}, \textbf{CNN's}, \textbf{odometrie}, ingeleid worden.
+Als we kijken naar het probleem dan begint het bij de RTK-GPS, RTK staat voor Real Time Kinematic en is een navigatietechniek die de positie van de ontvanger van de GPS-signalen tot op enkele centimeters nauwkeurig kan bepalen \autocite{8456505}.
+Dit wordt vaak gebruikt in de landbouw sector, precisielandbouw waar zaden op een specifieke plek gepland moeten worden is hier een voorbeeld van.
+Een RTK GPS-systeem heeft 2 hoofdcomponenten namelijk het basisstation en de rover.
+Het basisstation ontvangt de GPS-signalen en stuurt deze door naar de rover die zou nauwkeurig zijn positie kan bepalen en eventueel een correctie in het gekozen pad kan maken \autocite{9249176}.
+Het probleem doet zich voor als de signalen van de RTK-GPS niet meer goed ontvangen worden door een blockage.
+Dit kan gebeuren in bijvoorbeeld stedelijke omgevingen, wat werd bewezen door \textcite{9210580}, waar de gebouwen de signalen blokkeren zodat de rover zijn positie niet meer nauwkeurig kan bepalen.
+Een soortgelijk probleem doet zich voor in de boomkwekerij waar het bladerdak de signalen blokkeert en de robot van het pad afwijkt.
+Vaak wordt dit probleem opgevangen door een backup systeem te voorzien die de robot terug op het kan brengen wanneer deze zijn nauwkeurigheid verlies door problemen met de RTK-GPS.
 
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+Een voorbeeld van zo een oplossing is SLAM, SLAM staat voor Simultaneous Localization and Mapping en is een techniek die gebruik maakt van verschillende algoritmen om de locatie van de robot te bepalen en tegelijkertijd een map van zijn omgeving maakt \autocite{SLAM}.
 
-Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
+\section{Visual SLAM}\label{sec:visual-slam}
 
-\lipsum[7-20]
+\subsection{2.2.1 Basistechnieken voor Visual SLAM}\label{subsec:2.2.1-basistechnieken-voor-visual-slam}
+
+ORB
+    In 2015 werd ORB-SLAM geïntroduceerd door\textcite{Mur_Artal_2015}, dit is een algoritme dat gebruikt wordt in de computer-visie.
+    Het maakt gebruik van een monoculaire camera om de omgeving in kaart te brengen (mapping) en en tegelijkertijd de locatie van de camera volgen en bepalen (localization).
+    Een van de innovaties van ORB-SLAM is het gebruik van ORB, dit staat voor Oriented FAST and Rotated BRIEF\@.
+    FAST en BRIEF werden voor de eerste keer samen gebruikt in \textcite{6202705}waarin BRIEF werd gebruikt voor het beschrijven van de features en FAST voor het matchen van de features.
+    Deze aanpak van het combineren van deze 2 methodes zorgt voor robuustheid, snelheid en vertoont ook een verlaging in de computationele tijd.
+    Er zijn 3 threads die tegelijkertijd lopen bij ORB-SLAM, namelijk \textbf{Tracking}, \textbf{Local Mapping} en \textbf{Loop Closing}.
+
+
